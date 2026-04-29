@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Minha Evolução</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<style>
+  :root {
+    --bg: #f7f5f0; --card: #ffffff; --text: #1a1a1a; --muted: #6b6b6b;
+    --border: rgba(0,0,0,0.08); --green: #2d6a4f; --green-light: #d8f3dc;
+    --green-mid: #52b788; --amber: #b5451b; --amber-light: #fde8d8;
+    --purple: #4a3f6b; --blue: #1d4e89;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; font-size: 15px; line-height: 1.6; }
+
+  /* TELA CONFIRMAÇÃO */
+  #tela-confirmacao { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 2rem 1.5rem; text-align: center; }
+  .confirm-icon { width: 64px; height: 64px; background: var(--green-light); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 28px; margin: 0 auto 1.5rem; }
+  .confirm-title { font-family: 'DM Serif Display', serif; font-size: 1.75rem; margin-bottom: 0.5rem; line-height: 1.2; }
+  .confirm-sub { font-size: 14px; color: var(--muted); margin-bottom: 2rem; max-width: 280px; }
+  .confirm-name { font-family: 'DM Serif Display', serif; font-size: 1.3rem; color: var(--green); background: var(--green-light); padding: 0.75rem 2rem; border-radius: 12px; margin-bottom: 1.5rem; display: inline-block; }
+  .btn { width: 100%; max-width: 320px; padding: 14px; border-radius: 12px; font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 500; cursor: pointer; border: none; margin-bottom: 0.75rem; transition: opacity 0.15s; display: block; }
+  .btn-primary { background: var(--green); color: white; }
+  .btn-primary:hover { opacity: 0.88; }
+  .btn-secondary { background: transparent; color: var(--muted); border: 0.5px solid var(--border) !important; font-size: 14px; padding: 10px; }
+  .confirm-security { margin-top: 1.5rem; font-size: 12px; color: var(--muted); display: flex; align-items: center; gap: 5px; justify-content: center; }
+
+  /* TELA ERRO */
+  #tela-erro { display: none; min-height: 100vh; align-items: center; justify-content: center; flex-direction: column; text-align: center; padding: 2rem; }
+  .err-icon { font-size: 48px; margin-bottom: 1rem; }
+  #tela-erro h2 { font-family: 'DM Serif Display', serif; font-size: 1.5rem; margin-bottom: 0.5rem; }
+  #tela-erro p { color: var(--muted); font-size: 14px; max-width: 280px; }
+
+  /* DASHBOARD */
+  #tela-dashboard { display: none; }
+  .header { background: var(--green); color: white; padding: 2rem 1.5rem 3.5rem; position: relative; overflow: hidden; }
+  .header::after { content: ''; position: absolute; bottom: -2px; left: 0; right: 0; height: 40px; background: var(--bg); border-radius: 50% 50% 0 0 / 40px 40px 0 0; }
+  .header-inner { max-width: 640px; margin: 0 auto; }
+  .header-label { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.7; margin-bottom: 0.4rem; }
+  .header-name { font-family: 'DM Serif Display', serif; font-size: 2rem; font-weight: 400; margin-bottom: 0.25rem; line-height: 1.2; }
+  .header-sub { font-size: 13px; opacity: 0.75; }
+  .header-week { display: inline-block; background: rgba(255,255,255,0.18); border-radius: 999px; padding: 4px 12px; font-size: 12px; margin-top: 0.75rem; font-weight: 500; }
+  .content { max-width: 640px; margin: 0 auto; padding: 1.25rem 1.25rem 3rem; }
+  .section-label { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); font-weight: 500; margin-bottom: 0.75rem; margin-top: 1.75rem; }
+  .metrics-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 0.5rem; }
+  .metric-card { background: var(--card); border-radius: 16px; padding: 1rem 1.1rem; border: 0.5px solid var(--border); }
+  .metric-card.full { grid-column: 1 / -1; }
+  .metric-label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 0.3rem; }
+  .metric-value { font-family: 'DM Serif Display', serif; font-size: 2rem; font-weight: 400; color: var(--text); line-height: 1; margin-bottom: 0.35rem; }
+  .metric-unit { font-family: 'DM Sans', sans-serif; font-size: 14px; color: var(--muted); font-weight: 300; }
+  .badge { display: inline-flex; align-items: center; gap: 4px; font-size: 12px; font-weight: 500; padding: 3px 9px; border-radius: 999px; }
+  .badge.good { background: var(--green-light); color: var(--green); }
+  .badge.warn { background: var(--amber-light); color: var(--amber); }
+  .badge.neutral { background: #f0f0f0; color: var(--muted); }
+  .chart-card { background: var(--card); border-radius: 16px; padding: 1.25rem; border: 0.5px solid var(--border); margin-bottom: 10px; }
+  .chart-title { font-size: 13px; font-weight: 500; color: var(--text); margin-bottom: 0.25rem; }
+  .chart-sub { font-size: 12px; color: var(--muted); margin-bottom: 1rem; }
+  .chart-wrap { position: relative; width: 100%; height: 160px; }
+  .wellbeing-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .wellbeing-card { background: var(--card); border-radius: 16px; padding: 1rem; border: 0.5px solid var(--border); text-align: center; }
+  .wellbeing-label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 0.2rem; }
+  .wellbeing-val { font-family: 'DM Serif Display', serif; font-size: 1.5rem; color: var(--text); }
+  .stars { display: flex; justify-content: center; gap: 2px; margin-top: 4px; }
+  .star { width: 10px; height: 10px; border-radius: 50%; background: #e0e0e0; }
+  .star.on { background: var(--green-mid); }
+  .comment-card { background: var(--card); border-radius: 0 16px 16px 0; padding: 1.25rem; border: 0.5px solid var(--border); border-left: 3px solid var(--green-mid); }
+  .comment-week { font-size: 11px; color: var(--muted); margin-bottom: 0.4rem; text-transform: uppercase; letter-spacing: 0.07em; }
+  .comment-text { font-size: 13.5px; color: var(--text); line-height: 1.65; font-style: italic; }
+  .progress-bar-wrap { background: #f0f0f0; border-radius: 999px; height: 6px; margin-top: 0.5rem; overflow: hidden; }
+  .progress-bar-fill { height: 100%; border-radius: 999px; background: var(--green-mid); }
+  .legend-row { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 8px; }
+  .legend-item { display: flex; align-items: center; gap: 5px; font-size: 11px; color: var(--muted); }
+  .legend-dot { width: 10px; height: 10px; border-radius: 2px; }
+  .footer { text-align: center; font-size: 12px; color: var(--muted); padding: 1rem; margin-top: 1rem; }
+</style>
+</head>
+<body>
+
+<!-- TELA 1: Confirmação -->
+<div id="tela-confirmacao">
+  <div class="confirm-icon">🌿</div>
+  <h1 class="confirm-title">Seu resultado<br>chegou!</h1>
+  <p class="confirm-sub">Antes de continuar, confirme que você é:</p>
+  <div class="confirm-name" id="confirm-nome">—</div>
+  <button class="btn btn-primary" onclick="confirmar()">Sim, sou eu — ver minha evolução</button>
+  <button class="btn btn-secondary" onclick="negar()">Não sou eu</button>
+  <p class="confirm-security">🔒 Acesso restrito ao paciente</p>
+</div>
+
+<!-- TELA 2: Erro -->
+<div id="tela-erro">
+  <div class="err-icon">🔒</div>
+  <h2>Acesso não autorizado</h2>
+  <p>Este link não é válido ou pertence a outro paciente. Solicite um novo link à sua nutricionista.</p>
+</div>
+
+<!-- TELA 3: Dashboard -->
+<div id="tela-dashboard">
+  <div class="header">
+    <div class="header-inner">
+      <p class="header-label">Acompanhamento nutricional</p>
+      <h2 class="header-name" id="paciente-nome">—</h2>
+      <p class="header-sub" id="paciente-data">—</p>
+      <span class="header-week" id="semana-badge">—</span>
+    </div>
+  </div>
+  <div class="content">
+    <p class="section-label">Resumo desta semana</p>
+    <div class="metrics-grid">
+      <div class="metric-card">
+        <p class="metric-label">Peso</p>
+        <p class="metric-value" id="peso-atual">—</p>
+        <span class="badge" id="peso-badge">—</span>
+      </div>
+      <div class="metric-card">
+        <p class="metric-label">Circ. abdominal</p>
+        <p class="metric-value" id="ca-atual">—</p>
+        <span class="badge" id="ca-badge">—</span>
+      </div>
+      <div class="metric-card full">
+        <p class="metric-label">Dias de treino esta semana</p>
+        <p class="metric-value" id="treino-atual">—</p>
+        <div class="progress-bar-wrap"><div class="progress-bar-fill" id="treino-bar" style="width:0%"></div></div>
+      </div>
+    </div>
+
+    <p class="section-label">Evolução do peso</p>
+    <div class="chart-card">
+      <p class="chart-title">Peso ao longo das semanas</p>
+      <p class="chart-sub" id="peso-sub">—</p>
+      <div class="chart-wrap"><canvas id="chartPeso"></canvas></div>
+    </div>
+
+    <p class="section-label">Circunferência abdominal</p>
+    <div class="chart-card">
+      <p class="chart-title">Circunferência ao longo das semanas</p>
+      <p class="chart-sub" id="ca-sub">—</p>
+      <div class="chart-wrap"><canvas id="chartCA"></canvas></div>
+    </div>
+
+    <p class="section-label">Adesão ao plano alimentar</p>
+    <div class="chart-card">
+      <p class="chart-title">Refeições fora do plano por semana</p>
+      <p class="chart-sub">Menos é melhor — meta: 0 por semana</p>
+      <div class="chart-wrap"><canvas id="chartAdesao"></canvas></div>
+      <div class="legend-row">
+        <div class="legend-item"><div class="legend-dot" style="background:#52b788"></div>dentro do plano</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#e07a5f"></div>fora do plano</div>
+      </div>
+    </div>
+
+    <p class="section-label">Bem-estar desta semana</p>
+    <div class="wellbeing-grid">
+      <div class="wellbeing-card">
+        <div class="wellbeing-label">Motivação</div>
+        <div class="wellbeing-val" id="motivacao-val">—</div>
+        <div class="stars" id="motivacao-stars"></div>
+      </div>
+      <div class="wellbeing-card">
+        <div class="wellbeing-label">Humor</div>
+        <div class="wellbeing-val" id="humor-val">—</div>
+        <div class="stars" id="humor-stars"></div>
+      </div>
+      <div class="wellbeing-card">
+        <div class="wellbeing-label">Vegetais</div>
+        <div class="wellbeing-val" id="vegetais-val" style="font-size:13px;font-family:'DM Sans',sans-serif;color:var(--muted)">—</div>
+      </div>
+      <div class="wellbeing-card">
+        <div class="wellbeing-label">Frutas</div>
+        <div class="wellbeing-val" id="frutas-val" style="font-size:13px;font-family:'DM Sans',sans-serif;color:var(--muted)">—</div>
+      </div>
+    </div>
+
+    <p class="section-label">Seu relato desta semana</p>
+    <div class="comment-card" id="comment-card" style="display:none">
+      <p class="comment-week" id="comment-week">—</p>
+      <p class="comment-text" id="comment-text">—</p>
+    </div>
+  </div>
+  <div class="footer">Acompanhamento gerado automaticamente após envio do formulário semanal.</div>
+</div>
+
+<script>
+  let dadosGlobais = null;
+
+  function parseParams() {
+    const params = {};
+    window.location.search.slice(1).split('&').forEach(p => {
+      const [k, ...rest] = p.split('=');
+      if (k) params[decodeURIComponent(k)] = decodeURIComponent(rest.join('=').replace(/\+/g, ' '));
+    });
+    return params;
+  }
+
+  function confirmar() {
+    document.getElementById('tela-confirmacao').style.display = 'none';
+    document.getElementById('tela-dashboard').style.display = 'block';
+    renderDashboard(dadosGlobais);
+  }
+
+  function negar() {
+    document.getElementById('tela-confirmacao').style.display = 'none';
+    document.getElementById('tela-erro').style.display = 'flex';
+  }
+
+  function makeBadge(el, delta, unidade, menorMelhor) {
+    if (delta === null) { el.textContent = 'primeira semana'; el.className = 'badge neutral'; return; }
+    const positivo = menorMelhor ? delta < 0 : delta > 0;
+    el.textContent = `${delta < 0 ? '▼' : '▲'} ${Math.abs(delta).toFixed(1)}${unidade} vs sem. anterior`;
+    el.className = 'badge ' + (positivo ? 'good' : 'warn');
+  }
+
+  function makeStars(id, val) {
+    const el = document.getElementById(id);
+    el.innerHTML = '';
+    for (let i = 1; i <= 5; i++) {
+      const d = document.createElement('div');
+      d.className = 'star' + (i <= val ? ' on' : '');
+      el.appendChild(d);
+    }
+  }
+
+  function buildChart(id, labels, datasets, type, yCb) {
+    new Chart(document.getElementById(id), {
+      type: type || 'line',
+      data: { labels, datasets },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { display: false }, tooltip: { mode: 'index', intersect: false } },
+        scales: {
+          x: { grid: { color: 'rgba(0,0,0,0.06)' }, ticks: { color: '#999', font: { size: 11 }, maxRotation: 30 } },
+          y: { grid: { color: 'rgba(0,0,0,0.06)' }, ticks: { color: '#999', font: { size: 11 }, callback: yCb || (v => v) } }
+        }
+      }
+    });
+  }
+
+  function renderDashboard(p) {
+    const peso = parseFloat(p.peso) || null;
+    const ca   = parseFloat(p.ca) || null;
+    const treino = parseInt(p.treino) || 0;
+    const fora   = parseInt(p.fora) || 0;
+    const motivacao = parseInt(p.motivacao) || 0;
+    const humor     = parseInt(p.humor) || 0;
+    let historico = [];
+    try { historico = JSON.parse(p.historico || '[]'); } catch(e) {}
+
+    document.getElementById('paciente-nome').textContent = p.nome || '—';
+    document.getElementById('paciente-data').textContent = p.data || '—';
+    document.getElementById('semana-badge').textContent  = `Semana ${p.semana || '?'}`;
+
+    document.getElementById('peso-atual').innerHTML = `${peso !== null ? peso.toFixed(1) : '—'}<span class="metric-unit"> kg</span>`;
+    document.getElementById('ca-atual').innerHTML   = `${ca !== null ? ca.toFixed(1) : '—'}<span class="metric-unit"> cm</span>`;
+    document.getElementById('treino-atual').innerHTML = `${treino}<span class="metric-unit"> dias</span>`;
+    document.getElementById('treino-bar').style.width  = Math.min(100, (treino / 7) * 100) + '%';
+
+    const pesoPrev = historico.length ? historico[historico.length-1].peso : null;
+    const caPrev   = historico.length ? historico[historico.length-1].ca   : null;
+    makeBadge(document.getElementById('peso-badge'), peso && pesoPrev ? peso - pesoPrev : null, ' kg', true);
+    makeBadge(document.getElementById('ca-badge'),   ca && caPrev   ? ca - caPrev   : null, ' cm', true);
+
+    const serie = [...historico, { peso, ca, fora }];
+    const labels = serie.map((_, i) => `Sem ${i+1}`);
+    const pesos  = serie.map(s => s.peso);
+    const cas    = serie.map(s => s.ca);
+    const foras  = serie.map(s => s.fora);
+
+    if (pesos.length > 1) {
+      const d = (pesos[pesos.length-1] - pesos[0]).toFixed(1);
+      document.getElementById('peso-sub').textContent = d < 0 ? `Redução total de ${Math.abs(d)} kg desde o início` : `Variação de +${d} kg desde o início`;
+    }
+    if (cas.length > 1) {
+      const d = (cas[cas.length-1] - cas[0]).toFixed(1);
+      document.getElementById('ca-sub').textContent = d < 0 ? `Redução total de ${Math.abs(d)} cm desde o início` : `Variação de +${d} cm desde o início`;
+    }
+
+    buildChart('chartPeso', labels, [{ label: 'Peso', data: pesos, borderColor: '#1d4e89', backgroundColor: 'rgba(29,78,137,0.07)', borderWidth: 2, pointBackgroundColor: '#1d4e89', pointRadius: 5, tension: 0.35, fill: true }], 'line', v => v.toFixed(1)+' kg');
+    buildChart('chartCA',   labels, [{ label: 'CA',   data: cas,   borderColor: '#4a3f6b', backgroundColor: 'rgba(74,63,107,0.07)', borderWidth: 2, pointBackgroundColor: '#4a3f6b', pointRadius: 5, tension: 0.35, fill: true }], 'line', v => v.toFixed(1)+' cm');
+    buildChart('chartAdesao', labels, [{ label: 'Fora', data: foras, backgroundColor: foras.map(v => v===0?'#52b788':'#e07a5f'), borderRadius: 6, borderWidth: 0 }], 'bar', v => v+'x');
+
+    document.getElementById('motivacao-val').textContent = motivacao+'/5';
+    document.getElementById('humor-val').textContent     = humor+'/5';
+    makeStars('motivacao-stars', motivacao);
+    makeStars('humor-stars', humor);
+
+    const fmt = v => v.replace('Entre ','').replace('x na semana','x/sem');
+    document.getElementById('vegetais-val').textContent = fmt(p.vegetais || '—');
+    document.getElementById('frutas-val').textContent   = fmt(p.frutas   || '—');
+
+    if (p.comentario && p.comentario.trim()) {
+      document.getElementById('comment-card').style.display = 'block';
+      document.getElementById('comment-week').textContent  = `Relatado em ${p.data}`;
+      document.getElementById('comment-text').textContent  = p.comentario;
+    }
+  }
+
+  // Boot
+  (function() {
+    const p = parseParams();
+    if (!p.codigo || !p.nome) {
+      document.getElementById('tela-confirmacao').style.display = 'none';
+      document.getElementById('tela-erro').style.display = 'flex';
+      return;
+    }
+    dadosGlobais = p;
+    document.getElementById('confirm-nome').textContent = p.nome;
+  })();
+</script>
+</body>
+</html>
