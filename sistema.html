@@ -495,14 +495,14 @@ body {
 <!-- TELA 1: LOGIN -->
 <div class="tela ativa" id="tela-login">
   <div class="login-inner">
-    <div class="login-icon">🌿</div>
+    <div class="login-icon">💪</div>
     <h1 class="login-title">Meu<br>Acompanhamento</h1>
     <p class="login-sub">Digite seu código de acesso para continuar</p>
     <div class="input-wrap">
-      <input type="text" id="codigo-input" placeholder="ex: ALE-2026" maxlength="12" autocomplete="off" spellcheck="false">
+      <input type="text" id="codigo-input" placeholder="ex: Iniciais do nome e número" maxlength="12" autocomplete="off" spellcheck="false">
     </div>
     <button class="btn-primary" onclick="fazerLogin()">Entrar</button>
-    <div class="erro-msg" id="erro-login">Código não encontrado. Verifique com sua nutricionista.</div>
+    <div class="erro-msg" id="erro-login">Código não encontrado. Verifique com seu nutricionista.</div>
     <button onclick="irParaCadastro()" style="background:none;border:none;color:var(--sage);font-family:'DM Sans',sans-serif;font-size:13px;cursor:pointer;text-decoration:underline;margin-top:1.25rem;display:block;width:100%;text-align:center;">Primeira vez? Cadastre-se com seu convite</button>
   </div>
 </div>
@@ -510,9 +510,9 @@ body {
 <!-- TELA CADASTRO -->
 <div class="tela" id="tela-cadastro" style="flex-direction:column;align-items:center;justify-content:center;padding:2rem 1.5rem;background:var(--cream);">
   <div style="position:relative;z-index:1;width:100%;max-width:380px;text-align:center;">
-    <div class="login-icon">✨</div>
+    <div class="login-icon">🥝</div>
     <h2 class="login-title">Bem-vindo!</h2>
-    <p class="login-sub">Use o código de convite que sua nutricionista enviou</p>
+    <p class="login-sub">Use o código de convite que seu nutricionista enviou</p>
     <div class="input-wrap">
       <input id="cad-convite" type="text" placeholder="ex: NUTRI-4322" maxlength="20" autocomplete="off" style="width:100%;padding:13px 16px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-family:'DM Sans',sans-serif;font-size:15px;background:var(--card);color:var(--text);outline:none;text-align:center;letter-spacing:0.08em;text-transform:uppercase;">
     </div>
@@ -629,7 +629,7 @@ body {
     <div class="form-section">
       <label class="form-label">Como você se sentiu na maior parte da semana?</label>
       <div class="radio-grid">
-        <div class="radio-opt"><input type="radio" name="humor" id="h1" value="1"><label for="h1">😟<br><span style="font-size:10px;font-weight:400">Péssimo</span></label></div>
+        <div class="radio-opt"><input type="radio" name="humor" id="h1" value="1"><label for="h1">😡<br><span style="font-size:10px;font-weight:400">Péssimo</span></label></div>
         <div class="radio-opt"><input type="radio" name="humor" id="h2" value="2"><label for="h2">😕<br><span style="font-size:10px;font-weight:400">Ruim</span></label></div>
         <div class="radio-opt"><input type="radio" name="humor" id="h3" value="3"><label for="h3">😐<br><span style="font-size:10px;font-weight:400">Regular</span></label></div>
         <div class="radio-opt"><input type="radio" name="humor" id="h4" value="4"><label for="h4">🙂<br><span style="font-size:10px;font-weight:400">Bom</span></label></div>
