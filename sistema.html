@@ -1166,7 +1166,7 @@ function makeDots(id, val) {
 
 async function gerarFeedbackIA(s, semana) {
   const prev = historicoAtual.length ? historicoAtual[historicoAtual.length - 1] : null;
-  const prompt = `Você é uma nutricionista simpática e motivadora. Escreva um feedback curto e personalizado (3-4 frases) para a paciente ver no dashboard. Seja calorosa, específica nos números e termine com uma frase de incentivo. Não use saudação inicial.
+  const prompt = `Você é um nutricionista acolhedor e realista. Utilize até 4 frases curtas e diretas. Sem saudação. Sempre mencione constância e incentive a falar com o Nutricionista Pedro. Varie o vocabulário e evite repetir as mesmas frases entre os feedbacks.
 
 Semana ${semana}:
 - Peso: ${s.peso} kg${prev ? ` (anterior: ${prev.peso} kg, variação: ${(s.peso - prev.peso).toFixed(1)} kg)` : ' (primeira semana)'}
