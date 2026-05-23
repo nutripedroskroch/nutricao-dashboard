@@ -47,7 +47,7 @@ body {
   align-items: center;
   justify-content: center;
   padding: 2rem 1.5rem;
-  background: #0d1b2a;
+  background: #0a1628;
   position: relative;
   overflow: hidden;
 }
@@ -55,19 +55,50 @@ body {
 #tela-inicio::before {
   content: '';
   position: absolute;
-  top: -120px; right: -120px;
-  width: 400px; height: 400px;
+  top: -150px; right: -150px;
+  width: 450px; height: 450px;
   border-radius: 50%;
-  background: rgba(255,255,255,0.03);
+  background: radial-gradient(circle, rgba(180,140,60,0.08) 0%, transparent 70%);
 }
 
 #tela-inicio::after {
   content: '';
   position: absolute;
-  bottom: -80px; left: -80px;
-  width: 300px; height: 300px;
+  bottom: -100px; left: -100px;
+  width: 380px; height: 380px;
   border-radius: 50%;
-  background: rgba(255,255,255,0.02);
+  background: radial-gradient(circle, rgba(180,140,60,0.05) 0%, transparent 70%);
+}
+
+.inicio-gold-line {
+  width: 60px; height: 2px;
+  background: linear-gradient(90deg, transparent, #c9a84c, transparent);
+  margin: 0 auto;
+}
+
+.inicio-card-btn {
+  display: flex; align-items: center; gap: 14px;
+  width: 100%;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(201,168,76,0.2);
+  border-radius: var(--radius);
+  padding: 1rem 1.1rem;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.2s;
+}
+.inicio-card-btn:hover {
+  background: rgba(201,168,76,0.08);
+  border-color: rgba(201,168,76,0.45);
+}
+.inicio-card-icon {
+  width: 42px; height: 42px;
+  border-radius: 10px;
+  background: rgba(201,168,76,0.12);
+  border: 1px solid rgba(201,168,76,0.25);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  font-size: 18px; color: #c9a84c; font-weight: 600;
 }
 
 /* ── LOGIN ── */
@@ -804,29 +835,39 @@ body {
 
 <!-- TELA INICIAL -->
 <div class="tela ativa" id="tela-inicio">
-  <div class="login-inner">
-    <img src="Principal branca sem fundo.png" alt="Pedro Skroch Nutrição e Esporte" style="width:100%;margin:0 auto 2rem;display:block;">
-    <p style="font-size:13px;color:rgba(255,255,255,0.45);text-align:center;margin-bottom:1.25rem;letter-spacing:0.05em;">Como você quer acessar?</p>
+  <div class="login-inner" style="position:relative;z-index:1;">
 
-    <button onclick="mostrarTela('tela-login')" style="display:flex;align-items:center;gap:14px;width:100%;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);border-radius:var(--radius);padding:1rem 1.1rem;cursor:pointer;margin-bottom:10px;text-align:left;transition:background 0.15s;" onmouseover="this.style.background='rgba(255,255,255,0.12)'" onmouseout="this.style.background='rgba(255,255,255,0.07)'">
-      <div style="width:40px;height:40px;border-radius:10px;background:rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:18px;color:white;font-weight:500;">→</div>
+    <img src="Principal branca sem fundo.png" alt="Pedro Skroch Nutrição e Esporte"
+      style="width:100%;max-width:360px;margin:0 auto 1.5rem;display:block;">
+
+    <div class="inicio-gold-line" style="margin-bottom:1.25rem;"></div>
+
+    <p style="font-size:11px;color:rgba(255,255,255,0.3);text-align:center;margin-bottom:1.75rem;letter-spacing:0.14em;text-transform:uppercase;">Monitoramento Nutricional</p>
+
+    <button class="inicio-card-btn" onclick="mostrarTela('tela-login')" style="margin-bottom:10px;">
+      <div class="inicio-card-icon">→</div>
       <div style="flex:1;">
         <p style="font-size:15px;font-weight:500;color:white;margin:0 0 2px;">Já tenho meu código</p>
-        <p style="font-size:12px;color:rgba(255,255,255,0.45);margin:0;">Acesse seu acompanhamento semanal</p>
+        <p style="font-size:12px;color:rgba(255,255,255,0.38);margin:0;">Acesse seu acompanhamento semanal</p>
       </div>
-      <span style="color:rgba(255,255,255,0.3);font-size:18px;">›</span>
+      <span style="color:#c9a84c;font-size:20px;">›</span>
     </button>
 
-    <button onclick="irParaCadastro()" style="display:flex;align-items:center;gap:14px;width:100%;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);border-radius:var(--radius);padding:1rem 1.1rem;cursor:pointer;margin-bottom:1.5rem;text-align:left;transition:background 0.15s;" onmouseover="this.style.background='rgba(255,255,255,0.12)'" onmouseout="this.style.background='rgba(255,255,255,0.07)'">
-      <div style="width:40px;height:40px;border-radius:10px;background:rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:18px;color:white;font-weight:500;">+</div>
+    <button class="inicio-card-btn" onclick="irParaCadastro()" style="margin-bottom:2rem;">
+      <div class="inicio-card-icon">+</div>
       <div style="flex:1;">
         <p style="font-size:15px;font-weight:500;color:white;margin:0 0 2px;">É minha primeira vez</p>
-        <p style="font-size:12px;color:rgba(255,255,255,0.45);margin:0;">Cadastre-se com seu código de convite</p>
+        <p style="font-size:12px;color:rgba(255,255,255,0.38);margin:0;">Cadastre-se com seu código de convite</p>
       </div>
-      <span style="color:rgba(255,255,255,0.3);font-size:18px;">›</span>
+      <span style="color:#c9a84c;font-size:20px;">›</span>
     </button>
 
-    <button onclick="mostrarTela('tela-nutri-login')" style="background:none;border:none;color:rgba(255,255,255,0.25);font-family:'DM Sans',sans-serif;font-size:12px;cursor:pointer;display:block;width:100%;text-align:center;">Acesso nutricionista</button>
+    <div class="inicio-gold-line" style="margin-bottom:1.25rem;"></div>
+
+    <button onclick="mostrarTela('tela-nutri-login')"
+      style="background:none;border:none;color:rgba(255,255,255,0.2);font-family:'DM Sans',sans-serif;font-size:11px;cursor:pointer;display:block;width:100%;text-align:center;letter-spacing:0.06em;">
+      Acesso nutricionista
+    </button>
   </div>
 </div>
 
