@@ -47,7 +47,7 @@ body {
   align-items: center;
   justify-content: center;
   padding: 2rem 1.5rem;
-  background: var(--cream);
+  background: #0d1b2a;
   position: relative;
   overflow: hidden;
 }
@@ -58,8 +58,7 @@ body {
   top: -120px; right: -120px;
   width: 400px; height: 400px;
   border-radius: 50%;
-  background: var(--sage-light);
-  opacity: 0.6;
+  background: rgba(255,255,255,0.03);
 }
 
 #tela-inicio::after {
@@ -68,7 +67,7 @@ body {
   bottom: -80px; left: -80px;
   width: 300px; height: 300px;
   border-radius: 50%;
-  background: var(--warm);
+  background: rgba(255,255,255,0.02);
 }
 
 /* ── LOGIN ── */
@@ -806,29 +805,28 @@ body {
 <!-- TELA INICIAL -->
 <div class="tela ativa" id="tela-inicio">
   <div class="login-inner">
-    <img src="Principal azul sem fundo.png" alt="Pedro Skroch Nutrição e Esporte" style="width:100%;margin:0 auto 1.5rem;display:block;opacity:0.92;">
-    <h1 class="login-title">Monitoramento<br>Nutricional</h1>
-    <p class="login-sub">Como você quer acessar?</p>
+    <img src="Principal branca sem fundo.png" alt="Pedro Skroch Nutrição e Esporte" style="width:100%;margin:0 auto 2rem;display:block;">
+    <p style="font-size:13px;color:rgba(255,255,255,0.45);text-align:center;margin-bottom:1.25rem;letter-spacing:0.05em;">Como você quer acessar?</p>
 
-    <button onclick="mostrarTela('tela-login')" style="display:flex;align-items:center;gap:14px;width:100%;background:var(--card);border:1.5px solid var(--border);border-radius:var(--radius);padding:1rem 1.1rem;cursor:pointer;margin-bottom:10px;text-align:left;transition:border-color 0.15s;" onmouseover="this.style.borderColor='var(--sage)'" onmouseout="this.style.borderColor='var(--border)'">
-      <div style="width:40px;height:40px;border-radius:10px;background:var(--sage-light);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:18px;color:var(--sage-dark);font-weight:500;">→</div>
+    <button onclick="mostrarTela('tela-login')" style="display:flex;align-items:center;gap:14px;width:100%;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);border-radius:var(--radius);padding:1rem 1.1rem;cursor:pointer;margin-bottom:10px;text-align:left;transition:background 0.15s;" onmouseover="this.style.background='rgba(255,255,255,0.12)'" onmouseout="this.style.background='rgba(255,255,255,0.07)'">
+      <div style="width:40px;height:40px;border-radius:10px;background:rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:18px;color:white;font-weight:500;">→</div>
       <div style="flex:1;">
-        <p style="font-size:15px;font-weight:500;color:var(--text);margin:0 0 2px;">Já tenho meu código</p>
-        <p style="font-size:12px;color:var(--muted);margin:0;">Acesse seu acompanhamento semanal</p>
+        <p style="font-size:15px;font-weight:500;color:white;margin:0 0 2px;">Já tenho meu código</p>
+        <p style="font-size:12px;color:rgba(255,255,255,0.45);margin:0;">Acesse seu acompanhamento semanal</p>
       </div>
-      <span style="color:var(--muted);font-size:18px;">›</span>
+      <span style="color:rgba(255,255,255,0.3);font-size:18px;">›</span>
     </button>
 
-    <button onclick="irParaCadastro()" style="display:flex;align-items:center;gap:14px;width:100%;background:var(--card);border:1.5px solid var(--border);border-radius:var(--radius);padding:1rem 1.1rem;cursor:pointer;margin-bottom:1.5rem;text-align:left;transition:border-color 0.15s;" onmouseover="this.style.borderColor='var(--sage)'" onmouseout="this.style.borderColor='var(--border)'">
-      <div style="width:40px;height:40px;border-radius:10px;background:var(--sage-light);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:18px;color:var(--sage-dark);font-weight:500;">+</div>
+    <button onclick="irParaCadastro()" style="display:flex;align-items:center;gap:14px;width:100%;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);border-radius:var(--radius);padding:1rem 1.1rem;cursor:pointer;margin-bottom:1.5rem;text-align:left;transition:background 0.15s;" onmouseover="this.style.background='rgba(255,255,255,0.12)'" onmouseout="this.style.background='rgba(255,255,255,0.07)'">
+      <div style="width:40px;height:40px;border-radius:10px;background:rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:18px;color:white;font-weight:500;">+</div>
       <div style="flex:1;">
-        <p style="font-size:15px;font-weight:500;color:var(--text);margin:0 0 2px;">É minha primeira vez</p>
-        <p style="font-size:12px;color:var(--muted);margin:0;">Cadastre-se com seu código de convite</p>
+        <p style="font-size:15px;font-weight:500;color:white;margin:0 0 2px;">É minha primeira vez</p>
+        <p style="font-size:12px;color:rgba(255,255,255,0.45);margin:0;">Cadastre-se com seu código de convite</p>
       </div>
-      <span style="color:var(--muted);font-size:18px;">›</span>
+      <span style="color:rgba(255,255,255,0.3);font-size:18px;">›</span>
     </button>
 
-    <button onclick="mostrarTela('tela-nutri-login')" style="background:none;border:none;color:var(--muted);font-family:'DM Sans',sans-serif;font-size:12px;cursor:pointer;display:block;width:100%;text-align:center;opacity:0.5;">Acesso nutricionista</button>
+    <button onclick="mostrarTela('tela-nutri-login')" style="background:none;border:none;color:rgba(255,255,255,0.25);font-family:'DM Sans',sans-serif;font-size:12px;cursor:pointer;display:block;width:100%;text-align:center;">Acesso nutricionista</button>
   </div>
 </div>
 
