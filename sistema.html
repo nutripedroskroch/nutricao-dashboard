@@ -107,7 +107,7 @@ body {
   align-items: center;
   justify-content: center;
   padding: 2rem 1.5rem;
-  background: var(--cream);
+  background: #0a1628;
   position: relative;
   overflow: hidden;
 }
@@ -115,20 +115,19 @@ body {
 #tela-login::before {
   content: '';
   position: absolute;
-  top: -120px; right: -120px;
-  width: 400px; height: 400px;
+  top: -150px; right: -150px;
+  width: 450px; height: 450px;
   border-radius: 50%;
-  background: var(--sage-light);
-  opacity: 0.6;
+  background: radial-gradient(circle, rgba(180,140,60,0.06) 0%, transparent 70%);
 }
 
 #tela-login::after {
   content: '';
   position: absolute;
-  bottom: -80px; left: -80px;
-  width: 300px; height: 300px;
+  bottom: -100px; left: -100px;
+  width: 380px; height: 380px;
   border-radius: 50%;
-  background: var(--warm);
+  background: radial-gradient(circle, rgba(180,140,60,0.04) 0%, transparent 70%);
 }
 
 .login-inner {
@@ -142,7 +141,8 @@ body {
 .login-icon {
   width: 72px; height: 72px;
   border-radius: 50%;
-  background: var(--sage);
+  background: rgba(201,168,76,0.15);
+  border: 1px solid rgba(201,168,76,0.3);
   display: flex; align-items: center; justify-content: center;
   margin: 0 auto 1.5rem;
   font-size: 28px;
@@ -152,14 +152,14 @@ body {
   font-family: 'Fraunces', serif;
   font-size: 2rem;
   font-weight: 300;
-  color: var(--text);
+  color: white;
   line-height: 1.2;
   margin-bottom: 0.4rem;
 }
 
 .login-sub {
   font-size: 14px;
-  color: var(--muted);
+  color: rgba(255,255,255,0.4);
   margin-bottom: 2rem;
 }
 
@@ -171,12 +171,12 @@ body {
 .input-wrap input {
   width: 100%;
   padding: 14px 16px;
-  border: 1.5px solid var(--border);
+  border: 1px solid rgba(201,168,76,0.25);
   border-radius: var(--radius-sm);
   font-family: 'DM Sans', sans-serif;
   font-size: 15px;
-  background: var(--card);
-  color: var(--text);
+  background: rgba(255,255,255,0.06);
+  color: white;
   outline: none;
   transition: border-color 0.2s;
   text-align: center;
@@ -184,13 +184,13 @@ body {
   text-transform: uppercase;
 }
 
-.input-wrap input:focus { border-color: var(--sage); }
-.input-wrap input::placeholder { text-transform: none; letter-spacing: 0; color: #bbb; }
+.input-wrap input:focus { border-color: #c9a84c; }
+.input-wrap input::placeholder { text-transform: none; letter-spacing: 0; color: rgba(255,255,255,0.25); }
 
 .btn-primary {
   width: 100%;
   padding: 14px;
-  background: var(--sage);
+  background: linear-gradient(135deg, #c9a84c, #a8863a);
   color: white;
   border: none;
   border-radius: var(--radius-sm);
@@ -838,7 +838,7 @@ body {
   <div class="login-inner" style="position:relative;z-index:1;">
 
     <img src="Principal branca sem fundo.png" alt="Pedro Skroch Nutrição e Esporte"
-      style="width:100%;max-width:360px;margin:0 auto 1.5rem;display:block;">
+      style="width:100%;max-width:360px;margin:0 auto 0.75rem;display:block;">
 
     <div class="inicio-gold-line" style="margin-bottom:1.25rem;"></div>
 
@@ -882,33 +882,34 @@ body {
     </div>
     <button class="btn-primary" onclick="fazerLogin()">Entrar</button>
     <div class="erro-msg" id="erro-login">Código não encontrado. Verifique com seu nutricionista.</div>
-    <button onclick="mostrarTela('tela-inicio')" style="background:none;border:none;color:var(--muted);font-family:'DM Sans',sans-serif;font-size:13px;cursor:pointer;text-decoration:underline;margin-top:1.25rem;display:block;width:100%;text-align:center;">← Voltar</button>
+    <button onclick="mostrarTela('tela-inicio')" style="background:none;border:none;color:rgba(255,255,255,0.3);font-family:'DM Sans',sans-serif;font-size:13px;cursor:pointer;text-decoration:underline;margin-top:1.25rem;display:block;width:100%;text-align:center;">← Voltar</button>
   </div>
 </div>
 
 <!-- TELA CADASTRO -->
-<div class="tela" id="tela-cadastro" style="flex-direction:column;align-items:center;justify-content:center;padding:2rem 1.5rem;background:var(--cream);">
+<div class="tela" id="tela-cadastro" style="flex-direction:column;align-items:center;justify-content:center;padding:2rem 1.5rem;background:#0a1628;position:relative;overflow:hidden;">
+  <div style="position:absolute;top:-150px;right:-150px;width:450px;height:450px;border-radius:50%;background:radial-gradient(circle,rgba(180,140,60,0.06) 0%,transparent 70%);"></div>
   <div style="position:relative;z-index:1;width:100%;max-width:380px;text-align:center;">
     <div class="login-icon">🥝</div>
     <h2 class="login-title">Bem-vindo!</h2>
     <p class="login-sub">Use o código de convite que seu nutricionista enviou</p>
     <div class="input-wrap">
-      <input id="cad-convite" type="text" placeholder="ex: NUTRI-4322" maxlength="20" autocomplete="off" style="width:100%;padding:13px 16px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-family:'DM Sans',sans-serif;font-size:15px;background:var(--card);color:var(--text);outline:none;text-align:center;letter-spacing:0.08em;text-transform:uppercase;">
+      <input id="cad-convite" type="text" placeholder="ex: NUTRI-4322" maxlength="20" autocomplete="off" style="width:100%;padding:13px 16px;border:1px solid rgba(201,168,76,0.25);border-radius:var(--radius-sm);font-family:'DM Sans',sans-serif;font-size:15px;background:rgba(255,255,255,0.06);color:white;outline:none;text-align:center;letter-spacing:0.08em;text-transform:uppercase;">
     </div>
     <div id="cadastro-campos" style="display:none;margin-bottom:1rem;">
-      <input type="text" id="cad-nome" placeholder="Seu nome completo" style="width:100%;padding:13px 16px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-family:'DM Sans',sans-serif;font-size:15px;background:var(--card);color:var(--text);outline:none;margin-bottom:10px;display:block;">
-      <input type="tel" id="cad-tel" placeholder="WhatsApp com DDD (só números)" style="width:100%;padding:13px 16px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-family:'DM Sans',sans-serif;font-size:15px;background:var(--card);color:var(--text);outline:none;margin-bottom:10px;display:block;">
-      <input type="email" id="cad-email" placeholder="Seu e-mail (para lembretes semanais)" style="width:100%;padding:13px 16px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-family:'DM Sans',sans-serif;font-size:15px;background:var(--card);color:var(--text);outline:none;display:block;">
+      <input type="text" id="cad-nome" placeholder="Seu nome completo" style="width:100%;padding:13px 16px;border:1px solid rgba(201,168,76,0.25);border-radius:var(--radius-sm);font-family:'DM Sans',sans-serif;font-size:15px;background:rgba(255,255,255,0.06);color:white;outline:none;margin-bottom:10px;display:block;">
+      <input type="tel" id="cad-tel" placeholder="WhatsApp com DDD (só números)" style="width:100%;padding:13px 16px;border:1px solid rgba(201,168,76,0.25);border-radius:var(--radius-sm);font-family:'DM Sans',sans-serif;font-size:15px;background:rgba(255,255,255,0.06);color:white;outline:none;margin-bottom:10px;display:block;">
+      <input type="email" id="cad-email" placeholder="Seu e-mail (para lembretes semanais)" style="width:100%;padding:13px 16px;border:1px solid rgba(201,168,76,0.25);border-radius:var(--radius-sm);font-family:'DM Sans',sans-serif;font-size:15px;background:rgba(255,255,255,0.06);color:white;outline:none;display:block;">
     </div>
     <button class="btn-primary" id="cad-btn" onclick="verificarConvite()">Verificar convite</button>
-    <div id="cadastro-erro" style="background:var(--red-light);color:var(--red);font-size:13px;padding:10px 14px;border-radius:var(--radius-sm);margin-top:0.75rem;display:none;">Convite inválido ou já utilizado.</div>
-    <div id="cadastro-sucesso" style="display:none;background:var(--sage-dark);color:white;border-radius:var(--radius);padding:1.5rem;text-align:center;margin-top:1rem;">
-      <p style="font-size:12px;opacity:0.7;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:8px;">Seu código de acesso</p>
-      <p id="codigo-gerado" style="font-family:'Fraunces',serif;font-size:2rem;font-weight:300;letter-spacing:0.12em;margin-bottom:8px;">—</p>
-      <p style="font-size:12px;opacity:0.75;margin-bottom:1rem;">Salve este código! Você vai usá-lo toda semana.</p>
-      <button onclick="irParaFormAposCadastro()" style="background:rgba(255,255,255,0.2);border:1.5px solid rgba(255,255,255,0.4);color:white;padding:12px;border-radius:var(--radius-sm);font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;cursor:pointer;width:100%;">Começar meu primeiro monitoramento →</button>
+    <div id="cadastro-erro" style="background:rgba(184,64,64,0.2);color:#ffaaaa;font-size:13px;padding:10px 14px;border-radius:var(--radius-sm);margin-top:0.75rem;display:none;">Convite inválido ou já utilizado.</div>
+    <div id="cadastro-sucesso" style="display:none;background:rgba(201,168,76,0.15);border:1px solid rgba(201,168,76,0.3);color:white;border-radius:var(--radius);padding:1.5rem;text-align:center;margin-top:1rem;">
+      <p style="font-size:12px;opacity:0.6;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:8px;">Seu código de acesso</p>
+      <p id="codigo-gerado" style="font-family:'Fraunces',serif;font-size:2rem;font-weight:300;letter-spacing:0.12em;margin-bottom:8px;color:#c9a84c;">—</p>
+      <p style="font-size:12px;opacity:0.6;margin-bottom:1rem;">Salve este código! Você vai usá-lo toda semana.</p>
+      <button onclick="irParaFormAposCadastro()" style="background:linear-gradient(135deg,#c9a84c,#a8863a);border:none;color:white;padding:12px;border-radius:var(--radius-sm);font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;cursor:pointer;width:100%;">Começar meu primeiro monitoramento →</button>
     </div>
-    <button onclick="mostrarTela('tela-inicio')" style="background:none;border:none;color:var(--muted);font-family:'DM Sans',sans-serif;font-size:13px;cursor:pointer;text-decoration:underline;margin-top:1rem;display:block;width:100%;text-align:center;">← Voltar</button>
+    <button onclick="mostrarTela('tela-inicio')" style="background:none;border:none;color:rgba(255,255,255,0.3);font-family:'DM Sans',sans-serif;font-size:13px;cursor:pointer;text-decoration:underline;margin-top:1rem;display:block;width:100%;text-align:center;">← Voltar</button>
   </div>
 </div>
 
